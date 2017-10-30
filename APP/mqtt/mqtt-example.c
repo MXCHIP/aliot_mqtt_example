@@ -161,7 +161,8 @@ int mqtt_client(void)
         goto do_exit;
     }
     /* Init gprs hardware */
-    lite_phy_net_connect();
+    if(lite_phy_net_connect() != 0)
+        goto do_exit;
     /* Device AUTH */
     if (0 != IOT_SetupConnInfo(PRODUCT_KEY, DEVICE_NAME, DEVICE_SECRET, (void **)&pconn_info)) {
         aliot_mqtt_log("AUTH request failed!");
